@@ -18,6 +18,11 @@ export class ProjectsService {
 
   findOne(id: number) {
     const item = projects.find((project) => project.id === id);
+    if (!item) {
+      return {
+        message: 'Project not found by this ID!',
+      };
+    }
     return item;
   }
 
@@ -35,6 +40,10 @@ export class ProjectsService {
     const index = projects.findIndex((project) => project.id === id);
     if (index > -1) {
       projects.splice(index, 1);
+    } else {
+      return {
+        message: 'Project not found by this ID',
+      };
     }
     return {
       message: 'Project deleted Successfully!',
